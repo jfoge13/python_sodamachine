@@ -12,8 +12,8 @@ class Simulation:
         customer = Customer()
         soda_machine = SodaMachine()
         will_proceed = True
-        while will_proceed == True:
-            user_option = User_interface.simulation_main_menu()
+        while will_proceed:
+            user_option = User_interface.simulation_main_menu(self)
             if user_option == "1":
                 soda_machine.begin_transaction(customer)
             elif user_option == "2":
