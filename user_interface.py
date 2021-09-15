@@ -1,5 +1,8 @@
 import os
 
+class user_interface:
+    def __init__(self) -> None:
+        pass
 
 def simulation_main_menu():
     """Main menu prompting user to choose an option"""
