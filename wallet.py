@@ -2,6 +2,7 @@ import coins
 
 
 class Wallet:
+
     def __init__(self):
         self.money = []
         self.fill_wallet()
