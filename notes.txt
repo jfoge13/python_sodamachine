@@ -1,0 +1,14 @@
+
+               Customer
+    Back Pack           Wallet
+                            coins
+
+
+
+
+
+
+
+            Soda-Machine
+            User_Interface
+                cans

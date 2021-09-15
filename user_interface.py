@@ -1,11 +1,11 @@
 import os
 
 
-class user_interface:
+class User_interface:
     def __init__(self) -> None:
         pass
 
-    def simulation_main_menu(self):
+    def simulation_main_menu(self, ):
         """Main menu prompting user to choose an option"""
         validate_user_selection = (False, None)
         while validate_user_selection[0] is False:
@@ -36,7 +36,7 @@ class user_interface:
         print('You have {coins_list[3]} Pennies')
         print('Your wallet\'s total value is {total_value}')
 
-    def display_welcome(self):
+    def display_welcomeselfself(self):
         """Initial method asking user if they'll make a purchase. No errors."""
         print("\nWelcome to the soda machine.  We only take coins as payment. \n")
         user_response = self.continue_prompt(
@@ -61,7 +61,7 @@ class user_interface:
             "y": True,
             "yes": True
         }
-        user_input = input(self, text).lower()
+        user_input = input(text).lower()
         return switcher.get(user_input, False)
 
     def soda_selection(self, inventory):
@@ -73,7 +73,7 @@ class user_interface:
             i = 1
             for can in soda_options:
                 print("\n\tEnter -{i}- for {can} : ${can.price}")
-                i++
+                i += 1
             user_selection = self.try_parse_int(input("Selection:"))
             validated_user_selection = self.validate_coin_choice(
                 user_selection, soda_options)
