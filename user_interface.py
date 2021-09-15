@@ -5,7 +5,7 @@ class User_interface:
     def __init__(self) -> None:
         pass
 
-    def simulation_main_menu(self, ):
+    def simulation_main_menu(self):
         """Main menu prompting user to choose an option"""
         validate_user_selection = (False, None)
         while validate_user_selection[0] is False:
@@ -49,7 +49,7 @@ class User_interface:
 
     def output_text(self, text):
         """User input method that will print to console any string passed in as an argument"""
-        print("text")
+        print(text)
 
     def clear_console(self):
         """Used for clearing out the console. No errors."""
@@ -133,15 +133,16 @@ class User_interface:
                 print("Not a valid selection try again")
         return validated_user_selection[1]
 
-    # def validate_coin_selection(self, selection):
-    #     """Validation function that checks if 'selection' arugment is an int 1-5"""
-    #     switcher = {
-    #         1: (True, "Quarter"),
-    #         2: (True, "Dime"),
-    #         3: (True, "Nickel"),
-    #         4: (True, "Penny"),
-    #         5: (True, "Done")
-    #     return switcher.get(selection, (False, None))
+    def validate_coin_selection(self, selection):
+        """Validation function that checks if 'selection' arugment is an int 1-5"""
+        switcher = {
+            1: (True, "Quarter"),
+            2: (True, "Dime"),
+            3: (True, "Nickel"),
+            4: (True, "Penny"),
+            5: (True, "Done")
+        }
+        return switcher.get(selection, (False, None))
 
     def end_message(self, soda_name, change_amount):
         """Closing message displaying name of soda purchased and amount of change returned"""

@@ -12,26 +12,27 @@ class Customer:
         """Method allowing user to choose coins from wallet for payment"""
         will_proceed = False
         customer_payment = []
-        user_interface.output_text(
+        user_interface.User_interface.output_text(
             "Continue to add coins until you are ready to insert them into the machine")
         while will_proceed:
-            user_interface.display_can_cost(selected_soda)
-            user_interface.display_payment_value(customer_payment)
-            coin_name = user_interface.coin_selection()
+            user_interface.User_interface.display_can_cost(selected_soda)
+            user_interface.User_interface.display_payment_value(
+                customer_payment)
+            coin_name = user_interface.User_interface.coin_selection()
             if coin_name == "done":
                 break
             payment_coin = self.get_wallet_coin(coin_name)
             if payment_coin is not None:
                 customer_payment.append(payment_coin)
             else:
-                user_interface.output_text(
+                user_interface.User_interface.output_text(
                     "You do not have any of those coins, try again")
         return customer_payment
 
     def get_wallet_coin(self, coin_name):
         """Method responsible for retrieving a single coin from wallet's money list"""
         for coin in self.wallet.money:
-            if coin.name == coin.name:
+            if coin_name == coin.name:
                 self.wallet.money.remove(coin)
                 return coin
         return None
