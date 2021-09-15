@@ -5,14 +5,14 @@ from user_interface import User_interface
 
 class Simulation:
     def __init__(self):
-        pass
+       pass
 
     def run_simulation(self):
         """The central method called in main.py."""
         customer = Customer()
         soda_machine = SodaMachine()
-        will_proceed = False
-        while will_proceed:
+        will_proceed = True
+        while will_proceed == True:
             user_option = User_interface.simulation_main_menu()
             if user_option == "1":
                 soda_machine.begin_transaction(customer)

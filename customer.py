@@ -39,8 +39,8 @@ class Customer:
 
     def add_coins_to_wallet(self, coins_list):
         """Method responsible for adding coins from a list into wallet's money list"""
-        for coin in self.coin_list:
-            self.wallet.money.append(coins_list)
+        for coin in coins_list:
+            self.wallet.money.append(coin)
 
     def add_can_to_backpack(self, dispensed_can):
         """Adds instance of a can into backpack's puchased_cans list. No errors"""
@@ -61,13 +61,13 @@ class Customer:
             elif coin.name == "Penny":
                 coins_quantity[3] -= 1
         total_value = round(total_value, -2)
-        user_interface.display_customer_wallet_info(
+        user_interface.User_interface.display_customer_wallet_info(
             coins_quantity, total_value)
 
     def check_backpack(self):
         """Will display the cans contained in purchased_cans list in backpack"""
         if self.backpack.purchased_cans.length > 0:
-            user_interface.output_text("You have no cans in your backpack")
+            user_interface.User_interface.output_text("You have no cans in your backpack")
         else:
             for can in self.backpack.purchased_cans:
-                user_interface.output_text(can.name)
+                user_interface.User_interface.output_text(can.name)

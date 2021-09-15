@@ -36,7 +36,7 @@ class User_interface:
         print('You have {coins_list[3]} Pennies')
         print('Your wallet\'s total value is {total_value}')
 
-    def display_welcomeselfself(self):
+    def display_welcome(self):
         """Initial method asking user if they'll make a purchase. No errors."""
         print("\nWelcome to the soda machine.  We only take coins as payment. \n")
         user_response = self.continue_prompt(
@@ -146,6 +146,6 @@ class User_interface:
 
     def end_message(self, soda_name, change_amount):
         """Closing message displaying name of soda purchased and amount of change returned"""
-        print(f'Enjoy your {self.soda}')
+        print(f'Enjoy your {soda_name}')
         if change_amount >= 0:
             print(f'Dispensing ${change_amount}')
