@@ -136,7 +136,7 @@ class SodaMachine:
                 self.inventory.remove(can)
                 return can
             else:
-                return selected_soda_name
+                pass
 
     def return_inventory(self, chosen_soda):
         """Re-adds a remove can back to inventory upon unsuccessful purchase attempt"""
