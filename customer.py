@@ -8,18 +8,18 @@ class Customer:
         self.wallet = Wallet()
         self.backpack = Backpack()
 
-    def gather_coins_from_wallet(self, selected_soda):
+    def gather_coins_from_wallet(self, selected_soda_name):
         """Method allowing user to choose coins from wallet for payment"""
         will_proceed = False
         customer_payment = []
         user_interface.output_text(
             "Continue to add coins until you are ready to insert them into the machine")
-        while will_proceed:
-            user_interface.display_can_cost(selected_soda)
+        while will_proceed == False:
+            user_interface.display_can_cost(selected_soda_name)
             user_interface.display_payment_value(
                 customer_payment)
             coin_name = user_interface.coin_selection()
-            if coin_name == "done":
+            if coin_name.lower() == "done":
                 break
             payment_coin = self.get_wallet_coin(coin_name)
             if payment_coin is not None:
@@ -35,6 +35,7 @@ class Customer:
             if coin_name == coin.name:
                 self.wallet.money.remove(coin)
                 return coin
+
         return None
 
     def add_coins_to_wallet(self, coins_list):
@@ -67,7 +68,8 @@ class Customer:
     def check_backpack(self):
         """Will display the cans contained in purchased_cans list in backpack"""
         if self.backpack.purchased_cans.length > 0:
-            user_interface.User_interface.output_text("You have no cans in your backpack")
+            user_interface.User_interface.output_text(
+                "You have no cans in your backpack")
         else:
             for can in self.backpack.purchased_cans:
                 user_interface.User_interface.output_text(can.name)

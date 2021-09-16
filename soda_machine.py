@@ -9,6 +9,7 @@ class SodaMachine:
         self.register = []
         self.inventory = []
         self.fill_inventory()
+        self.fill_register()
 
     def fill_register(self):
         """Method will fill SodaMachine's register with certain amounts of each coin when called."""
@@ -50,30 +51,30 @@ class SodaMachine:
 
         user_interface.output_text("Transaction complete")
 
-    def calculate_transaction(self, customer_payment, selected_soda):
+    def calculate_transaction(self, customer_payment, selected_soda, customer):
         total_payment_value = self.calculate_coin_value(customer_payment)
-        if total_payment_value < selected_soda.price:
+        if total_payment_value > selected_soda.price:
             change_value = self.determine_change_value(
                 total_payment_value, selected_soda.price)
             customer_change = self.gather_change_from_register(change_value)
             if customer_change is None:
                 user_interface.output_text(
                     'Dispensing ${total_payment_value} back to customer')
-                Customer.add_coins_to_wallet(customer_payment)
+                customer.add_coins_to_wallet(customer_payment)
                 self.return_inventory(selected_soda)
             else:
                 self.deposit_coins_into_register(customer_payment)
-                Customer.add_coins_to_wallet(customer_change)
-                Customer.add_can_to_backpack(selected_soda)
+                customer.add_coins_to_wallet(customer_change)
+                customer.add_can_to_backpack(selected_soda)
                 user_interface.end_message(selected_soda, change_value)
         elif total_payment_value == selected_soda.price:
             self.deposit_coins_into_register(customer_payment)
-            Customer.add_can_to_backpack(selected_soda)
+            customer.add_can_to_backpack(selected_soda)
             user_interface.end_message(selected_soda, 0)
         else:
             user_interface.output_text(
                 "You do not have enough money to purchase this item, returning payment")
-            Customer.add_coins_to_wallet(customer_payment)
+            customer.add_coins_to_wallet(customer_payment)
             self.return_inventory(selected_soda)
 
     def gather_change_from_register(self, change_value):
@@ -105,7 +106,7 @@ class SodaMachine:
     def get_coin_from_register(self, coin_name):
         """Removes and returns a coin from register"""
         for coin in self.register:
-            if coin.name == coin_name:
+            if coin.name.lower() == coin_name:
                 self.register.remove(coin)
                 return coin
         return None
@@ -113,27 +114,29 @@ class SodaMachine:
     def register_has_coin(self, coin_name):
         """Searches register for a type of coin, returns True if coin is found"""
         for coin in self.register:
-            if coin.name == coin_name:
+            if coin.name.lower() == coin_name:
                 return True
         return False
 
     def determine_change_value(self, total_payment, selected_soda_price):
         """Determines amount of change needed by finding difference of payment amount and can price"""
-        return round(selected_soda_price - total_payment, 2)
+        return round(total_payment - selected_soda_price, 2)
 
     def calculate_coin_value(self, coin_list):
         """Takes in a list of coins, returns the monetary value of list."""
+        total_value = 0
         for coin in coin_list:
-            self.total_value += coin.value
-        return round(self.total_value, 2)
+            total_value += coin.value
+        return round(total_value, 2)
 
     def get_inventory_soda(self, selected_soda_name):
         """Returns the first instance of a can whose name matches the selected_soda_name parameter"""
         for can in self.inventory:
-            if can == selected_soda_name:
+            if can.name == selected_soda_name:
                 self.inventory.remove(can)
                 return can
-        return None
+            else:
+                return selected_soda_name
 
     def return_inventory(self, chosen_soda):
         """Re-adds a remove can back to inventory upon unsuccessful purchase attempt"""
